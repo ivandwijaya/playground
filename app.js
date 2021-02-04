@@ -19,18 +19,7 @@ catch(err) {}
 
 const app = express();
 app.get('/', (req, res) => {
-  if (client) {
-    client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-      if (err) throw err;
-      for (let row of res.rows) {
-        res.send(JSON.stringify(row))
-      }
-      client.end();
-    });
-  }
-  else {
-    res.send('INDEXES')
-  }
+    res.send(process.env.DATABASE_URL)
 })
 
 const PORT = process.env.PORT || 5000
